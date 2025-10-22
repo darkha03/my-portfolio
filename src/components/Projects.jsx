@@ -1,80 +1,271 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { projectsData } from "../data/projectsData";
+import { X, ExternalLink, Github } from "lucide-react";
 
 export const Projects = () => {
-  const [selected, setSelected] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [thumbStart, setThumbStart] = useState(0);
 
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "A personal portfolio built with React and TailwindCSS.",
-      details: `This project includes smooth scrolling, responsive design, and component structure. It uses Vite for development and is deployed on Vercel.`,
-      github: "https://github.com/yourusername/portfolio",
-      demo: "https://your-portfolio-site.com"
-    },
-    {
-      title: "Todo App",
-      description: "A task manager with authentication and filters.",
-      details: `Built with React, Express.js, MongoDB, and JWT. Users can create, update, and delete tasks after logging in. It has filtering by status and due date.`,
-      github: "https://github.com/yourusername/todo-app",
-      demo: "#"
-    },
-    {
-      title: "API Backend",
-      description: "RESTful API with Node and Express.",
-      details: `Implements routes for users, authentication, and content. MongoDB stores data. Used in multiple frontend projects.`,
-      github: "https://github.com/yourusername/api-backend",
-      demo: "#"
-    }
-  ];
-
-  const toggleProject = (index) => {
-    setSelected(selected === index ? null : index);
+  const openModal = (project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0); // Reset to first image
   };
 
+  const closeModal = () => {
+    setSelectedProject(null);
+    setCurrentImageIndex(0);
+  };
+
+  // Auto-cycle through gallery images every 5 seconds
+  useEffect(() => {
+    if (!selectedProject || !selectedProject.gallery) return;
+
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => 
+        prev >= selectedProject.gallery.length - 1 ? 0 : prev + 1
+      );
+    }, 5000); // 5 seconds
+
+    return () => clearInterval(interval);
+  }, [selectedProject]);
+
+  // Close on ESC and lock background scroll when modal is open
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedProject(null);
+      }
+    };
+
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedProject]);
+
+  // Reset thumbnail zone when modal opens or image changes
+  useEffect(() => {
+    setThumbStart(
+      selectedProject && selectedProject.gallery
+        ? Math.max(Math.min(currentImageIndex, selectedProject.gallery.length - 3), 0)
+        : 0
+    );
+  }, [selectedProject, currentImageIndex]);
+
   return (
-    <div className="py-16 px-6 max-w-5xl mx-auto text-center">
+    <div className="py-16 px-6 max-w-5xl mx-auto text-center" id="projects" data-aos="fade-up">
       <h2 className="text-3xl font-bold mb-6 text-red-600">Projects</h2>
-      <p className="text-gray-700 mb-10">Click a project to view more details below.</p>
+      <p className="text-gray-700 mb-10">Click a project to view more details.</p>
 
       <div className="grid gap-6 md:grid-cols-2 grid-cols-1 text-left">
-        {projects.map((project, idx) => (
+        {projectsData.map((project) => (
           <div
-            key={idx}
-            onClick={() => toggleProject(idx)}
-            className="border border-black rounded-xl p-4 cursor-pointer hover:shadow-lg transition"
+            key={project.id}
+            onClick={() => openModal(project)}
+            className="border border-black rounded-xl p-4 cursor-pointer hover:shadow-lg transition transform hover:scale-105"
           >
             <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
             <p className="text-sm text-gray-700">{project.description}</p>
+            {project.technologies && (
+              <div className="flex flex-wrap gap-2 mt-3">
+                {project.technologies.slice(0, 3).map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
 
-      {/* Expanded Details Section */}
-      {selected !== null && (
-        <div className="mt-10 p-6 border-t border-black text-left bg-gray-50 rounded-xl">
-          <h3 className="text-2xl font-bold mb-3 text-red-600">
-            {projects[selected].title}
-          </h3>
-          <p className="text-gray-800 mb-4">{projects[selected].details}</p>
-          <div className="flex gap-4">
-            <a
-              href={projects[selected].github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-red-600 hover:underline"
+      {/* Modal */}
+      {selectedProject && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+          onClick={closeModal}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden"
+            style={{ maxHeight: "85vh" }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 p-2 rounded-full text-gray-600 hover:text-red-600 hover:bg-red-50 transition"
+              aria-label="Close modal"
             >
-              GitHub
-            </a>
-            <a
-              href={projects[selected].demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-red-600 hover:underline"
-            >
-              Live Demo
-            </a>
+              <X size={22} />
+            </button>
+
+            {/* Content */}
+            <div className="grid md:grid-cols-3 gap-6 p-6 overflow-y-auto" style={{ maxHeight: "85vh" }}>
+              {/* Left: Image + Gallery */}
+              <div className="md:col-span-1 flex flex-col gap-3">
+                {/* Main Image */}
+                <div className="w-full h-48 md:h-64 bg-gray-50 rounded-xl flex items-center justify-center overflow-hidden">
+                  {selectedProject.gallery ? (
+                    <img
+                      src={selectedProject.gallery[currentImageIndex]}
+                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                      className="w-full h-full object-contain transition-opacity duration-500"
+                    />
+                  ) : selectedProject.image ? (
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <div className="w-full h-full rounded-xl bg-gradient-to-br from-gray-100 to-gray-200" />
+                  )}
+                </div>
+
+                {/* Gallery Carousel */}
+                {selectedProject.gallery && selectedProject.gallery.length > 1 && (
+                  <div className="relative w-full mt-2">
+                    {/* Prev Button */}
+                    <button
+                      onClick={() => {
+                        setCurrentImageIndex(
+                          currentImageIndex === 0
+                            ? selectedProject.gallery.length - 1
+                            : currentImageIndex - 1
+                        );
+                        setThumbStart(
+                          thumbStart === 0
+                            ? Math.max(selectedProject.gallery.length - 3, 0)
+                            : thumbStart - 1
+                        );
+                      }}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-red-100 text-red-600 rounded-full p-2 shadow transition"
+                      aria-label="Previous image"
+                      style={{ marginLeft: '4px' }}
+                    >
+                      &#8592;
+                    </button>
+                    {/* Next Button */}
+                    <button
+                      onClick={() => {
+                        setCurrentImageIndex(
+                          currentImageIndex === selectedProject.gallery.length - 1
+                            ? 0
+                            : currentImageIndex + 1
+                        );
+                        setThumbStart(
+                          thumbStart === Math.max(selectedProject.gallery.length - 3, 0)
+                            ? 0
+                            : thumbStart + 1
+                        );
+                      }}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-red-100 text-red-600 rounded-full p-2 shadow transition"
+                      aria-label="Next image"
+                      style={{ marginRight: '4px' }}
+                    >
+                      &#8594;
+                    </button>
+                    {/* Thumbnails Zone */}
+                    <div className="flex justify-center gap-2 pt-2 overflow-hidden">
+                      {selectedProject.gallery
+                        .slice(thumbStart, thumbStart + 3)
+                        .map((img, idx) => {
+                          const realIdx = thumbStart + idx;
+                          return (
+                            <button
+                              key={realIdx}
+                              onClick={() => setCurrentImageIndex(realIdx)}
+                              className={`relative w-16 h-12 rounded-lg overflow-hidden border-2 transition-all bg-gray-50 ${
+                                realIdx === currentImageIndex
+                                  ? "border-red-600 ring-2 ring-red-200"
+                                  : "border-gray-300 hover:border-red-400"
+                              }`}
+                              aria-label={`Go to image ${realIdx + 1}`}
+                            >
+                              <img
+                                src={img}
+                                alt={`Thumbnail ${realIdx + 1}`}
+                                className="absolute inset-0 w-full h-full object-contain p-0.5"
+                              />
+                            </button>
+                          );
+                        })}
+                    </div>
+                  </div>
+                )}
+
+              </div>
+
+              {/* Right: Title + Details */}
+              <div className="md:col-span-2 flex flex-col">
+                <h3 id="project-modal-title" className="text-2xl font-bold text-red-600 mb-2">
+                  {selectedProject.title}
+                </h3>
+                {selectedProject.duration && (
+                  <div className="text-sm text-gray-500 mb-2">
+                    <span className="font-semibold">Duration:</span> {selectedProject.duration}
+                  </div>
+                )}
+                <p className="text-gray-700 mb-4">{selectedProject.description}</p>
+                <div className="text-gray-800 leading-relaxed whitespace-pre-line flex-1">
+                  {selectedProject.details}
+                </div>
+
+                {/* Footer: Tech + Buttons */}
+                <div className="mt-6 border-t pt-4 flex flex-wrap items-center justify-between gap-4">
+                  {/* Tech badges */}
+                  {selectedProject.technologies && selectedProject.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.technologies.map((tech, idx) => (
+                        <span key={idx} className="text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Action buttons */}
+                  <div className="ml-auto flex gap-3">
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-black transition"
+                    >
+                      <Github size={18} /> GitHub
+                    </a>
+                    {selectedProject.demo && selectedProject.demo !== "#" && (
+                      <a
+                        href={selectedProject.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-600 text-red-600 hover:bg-red-50 transition"
+                      >
+                        <ExternalLink size={18} /> Live Demo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

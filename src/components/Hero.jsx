@@ -8,7 +8,7 @@ export const Hero = () => {
         A passionate developer building clean, modern, and responsive websites.
       </p>
       <a
-        href="#contact"
+        href="#contacts"
         className="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-black transition duration-300"
       >
         Let's Work Together
