@@ -20,7 +20,7 @@ export const projectsData = [
     github: "https://github.com/darkha03/KitchenChaosClone",
     demo: "https://darkha03.itch.io/kichen-chaos-clone",
   image: "/projects/project2.png",
-  duration: "Mar 2024 - Aug 2024",
+  duration: "Mar 2025 - Aug 2025",
     gallery: [
       "projects/project2.png",
       "/projects/project2-screen1.png",
@@ -45,6 +45,41 @@ export const projectsData = [
       "/projects/project3-screen1.png",
       "/projects/project3-screen2.png",
       "/projects/project3-screen3.png"
+    ]
+  },
+  {
+    id: 4,
+    title: "Distance Love App",
+    description: "A mobile app to help long-distance couples stay connected.",
+    details: `This app offers features like shared calendars, video calls, and virtual date ideas to help couples maintain their relationship despite the distance.`,
+    technologies: ["React Native", "Node.js", "Expo", "PostgreSQL", "Socket.io", "Native Modules"],
+    github: "https://github.com/darkha03/distanceApp",
+    demo: "https://distance-love-app.vercel.app/",
+    image: "/projects/project4.png",
+    duration: "Sep 2025 - Nov 2025",
+    gallery: [
+      "/projects/project4.png",
+      "/projects/project4-screen1.png",
+      "/projects/project4-screen2.png"
+    ]
+  },
+  {
+    id: 5,
+    title: "My Count",
+    description: "A mobile app to help users track their expenses and manage budgets effectively.",
+    details: `My Count allows users to log daily expenses, categorize spending, and visualize their financial habits through charts and reports. The app also provides budget-setting features and alerts to help users stay on track.`,
+    technologies: ["Flutter", "Dart", "Firebase", "SQLite"],
+    github: "https://github.com/darkha03/MyCount",
+    demo: "https://distance-love-app.vercel.app/",
+    image: "/projects/project5.png",
+    duration: "Aug 2025 - Nov 2025",
+    gallery: [
+      "/projects/project5.png",
+      "/projects/project5-screen1.png",
+      "/projects/project5-screen2.png",
+      "/projects/project5-screen3.png",
+      "/projects/project5-screen4.png",
+      "/projects/project5-screen5.png"
     ]
   }
 ];

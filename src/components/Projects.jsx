@@ -227,20 +227,19 @@ export const Projects = () => {
                 </div>
 
                 {/* Footer: Tech + Buttons */}
-                <div className="mt-6 border-t pt-4 flex flex-wrap items-center justify-between gap-4">
+                <div className="mt-6 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
                   {/* Tech badges */}
-                  {selectedProject.technologies && selectedProject.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProject.technologies.map((tech, idx) => (
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies && selectedProject.technologies.length > 0 && (
+                      selectedProject.technologies.map((tech, idx) => (
                         <span key={idx} className="text-xs bg-red-100 text-red-700 px-3 py-1 rounded-full">
                           {tech}
                         </span>
-                      ))}
-                    </div>
-                  )}
-
+                      ))
+                    )}
+                  </div>
                   {/* Action buttons */}
-                  <div className="ml-auto flex gap-3">
+                  <div className="flex gap-3 justify-end">
                     <a
                       href={selectedProject.github}
                       target="_blank"
