@@ -11,7 +11,7 @@ export const Navbar = () => {
           <li><a href="#projects" className="hover:text-red-600">Projects</a></li>
           <li><a href="#contacts" className="hover:text-red-600">Contact</a></li>
         </ul>
-        <div className="flex space-x-4 ml-4">
+        <div className="hidden md:flex space-x-4 ml-4">
         <a
           href="mailto:gia_khanh.nguyen@insa-cvl.fr"
           className="hover:text-red-600"

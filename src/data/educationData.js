@@ -4,14 +4,14 @@ export const educationData = [
     year: "Start"    
   },
   {
-    year: "2018",
+    year: "2022",
     label: "High School",
-    details: "Graduated from ABC High School with honors."
+    details: "Graduated from Quoc Hoc High School for the Gifted with honors. Specialized in Mathematics."
   },
   {
-    year: "2019-2023",
-    label: "Bachelor's Degree",
-    details: "Studied Computer Science at XYZ University. Specialized in software engineering and AI."
+    year: "2022-2027",
+    label: "Engineer's Degree",
+    details: "Currently studing engineering at INSA Centre Val de Loire, France. Specialized in software engineering and technology security."
   },
   {
     year: "Now",
