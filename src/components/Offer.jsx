@@ -6,7 +6,7 @@ export const Offer = () => {
     },
     {
       title: "Backend Development",
-      description: "Creating scalable backend systems using Node.js, Express, and database integration.",
+      description: "Creating scalable backend systems using Node.js, Express, Flask, and database integration.",
     },
     {
       title: "UI/UX Design",

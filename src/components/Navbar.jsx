@@ -13,7 +13,7 @@ export const Navbar = () => {
         </ul>
         <div className="hidden md:flex space-x-4 ml-4">
         <a
-          href="mailto:gia_khanh.nguyen@insa-cvl.fr"
+          href="mailto:steve.khanhnguyen@gmail.com"
           className="hover:text-red-600"
           title="Email"
         >

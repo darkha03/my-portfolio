@@ -21,16 +21,36 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg-white text-black scroll-smooth">
+    <div className="text-black scroll-smooth">
       <Navbar />
       <main>
-        <Hero />
-        <Skills />
-        <WhyHire />
-        <Offer />
-        <Education />
-        <Projects />
-        <Contact />
+        <div className="bg-white">
+          <Hero />
+        </div>
+
+        <div className="bg-gray-50">
+          <Skills />
+        </div>
+
+        <div className="bg-white">
+          <WhyHire />
+        </div>
+
+        <div className="bg-gray-50">
+          <Offer />
+        </div>
+
+        <div className="bg-white">
+          <Education />
+        </div>
+
+        <div className="bg-gray-50">
+          <Projects />
+        </div>
+
+        <div className="bg-gray-200">
+          <Contact />
+        </div>
       </main>
     </div>
   );

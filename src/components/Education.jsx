@@ -51,10 +51,13 @@ export const Education = () => {
 
   return (
     <section ref={sectionRef} className="py-16 px-6 max-w-5xl mx-auto text-center" id="education">
-      <h2 className="text-3xl font-bold mb-36 text-red-600">Education</h2>
+      <h2 className="text-3xl font-bold mb-6 text-red-600">Education</h2>
+      <p className="text-gray-700 mb-10">
+        Here's a timeline of my educational journey:
+      </p>
       {/* Mobile: vertical timeline with alternating left/right details */}
       <div className="md:hidden relative w-full max-w-md mx-auto">
-        {/* "Start" label above timeline */}
+        
         <div className="text-center mb-6">
           <span className="text-sm font-bold text-red-600">Start</span>
         </div>
@@ -122,63 +125,83 @@ export const Education = () => {
       </div>
       {/* Desktop: existing horizontal timeline */}
       <div className="hidden md:flex md:flex-col md:items-center">
-        {/* Timeline */}
-        <div className="relative w-full max-w-5xl h-2 bg-gray-300 rounded-full mb-16" ref={timelineRef}>
-          <div
-            className="absolute left-4 top-0 h-2 bg-red-500 rounded-full transition-all duration-300"
-            style={{ width: `${fillPercent}%` }}
-          />
-          {/* Timestamps */}
-          {educationData.map((item, idx) => {
-            const step = 100 / (educationData.length - 1);
-            const left = `${idx * step}%`;
-            return (
-              <div
-                key={idx}
-                className="absolute -top-2 flex flex-col items-center"
-                style={{ left }}
-              >
+        {/* Desktop: timeline + anchored cards that expand away from timeline */}
+        {(() => {
+          const step = 100 / (educationData.length - 1);
+          const parentHeight = Math.max(220, educationData.length * 80);
+          return (
+            <div className="relative w-full max-w-5xl" style={{ minHeight: parentHeight }}>
+              {/* Timeline centered vertically */}
+              <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-2 bg-gray-300 rounded-full" ref={timelineRef}>
                 <div
-                  className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-300 ${
-                    idx <= activeIndex ? "bg-red-500 border-red-600 text-white" : "bg-white border-gray-400 text-gray-400"
-                  }`}
+                  className="absolute left-0 top-0 h-2 bg-red-500 rounded-full transition-all duration-300"
+                  style={{ width: `${fillPercent}%` }}
                 />
-                <div className={`mt-2 text-xs font-bold ${idx <= activeIndex ? "text-red-600" : "text-gray-400"}`}>{item.year}</div>
               </div>
-            );
-          })}
-        </div>
-        {/* Alternating details with connector lines from timeline dots */}
-        <div className="relative w-full max-w-5xl overflow-visible" style={{ minHeight: '220px' }}>
-          {educationData.map((item, idx) => {
-            const step = 100 / (educationData.length - 1);
-            const left = `${idx * step}%`;
-            const isAbove = idx % 2 === 1; // alternate above/below
-            if ((showAllDetails || idx <= activeIndex) && item.label != null) {
-              return (
-                <div
-                  key={idx}
-                  className="absolute"
-                  style={{ left, top: isAbove ? -150 : -10 }}
-                >
-                  {/* Connector line slightly to the right of the dot */}
-                  <span
-                    className={`absolute left-4 w-[2px] bg-red-500 ${
-                      isAbove ? 'bottom-[-24px] h-16' : 'top-[-4px] h-20'
-                    }`}
-                  />
-                  {/* Text content to the right of the connector */}
-                  <div className={`${isAbove ? '' : 'top-[-20px]'} ml-6 text-left min-w-[220px] max-w-sm`}
+
+              {/* Dots positioned along the timeline with year on the opposite side of the card */}
+              {educationData.map((item, idx) => {
+                const left = `${idx * step}%`;
+                const isAbove = idx % 2 === 1; // card above timeline when true
+                const offsetY = isAbove ? -25 : -75;
+                return (
+                  <div
+                    key={`dot-${idx}`}
+                    className="absolute flex items-center justify-center"
+                    style={{ left, top: '50%', transform: `translate(-50%, ${offsetY}%`}}
                   >
-                    <div className="font-semibold text-red-600">{item.label}</div>
-                    <div className="text-gray-700 text-sm leading-snug">{item.details}</div>
+                    {/* Use column order so year appears opposite the card: for above cards, year below (flex-col);
+                        for below cards, year above (flex-col-reverse) */}
+                    <div className={`${isAbove ? 'flex flex-col items-center' : 'flex flex-col-reverse items-center'}`}>
+                      <div
+                        className={`w-6 h-6 rounded-full border-2 flex items-center justify-center text-xs font-bold transition-all duration-300 ${
+                          idx <= activeIndex ? 'bg-red-500 border-red-600 text-white' : 'bg-white border-gray-400 text-gray-400'
+                        }`}
+                      />
+                      <div className={`mt-2 text-xs font-bold ${idx <= activeIndex ? 'text-red-600' : 'text-gray-400'}`}>
+                        {item.year}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
-            }
-            return null;
-          })}
-        </div>
+                );
+              })}
+
+              {/* Anchored cards: above entries grow upward (bottom anchored at timeline), below entries grow downward (top anchored) */}
+              {educationData.map((item, idx) => {
+                const left = `${idx * step}%`;
+                const isAbove = idx % 2 === 1;
+                if (!(showAllDetails || idx <= activeIndex) || item.label == null) return null;
+                return (
+                  <div
+                    key={`card-${idx}`}
+                    className="absolute"
+                    style={isAbove ? { left, bottom: '50%', transform: 'translateX(-50%) translateY(-12px)' } : { left, top: '50%', transform: 'translateX(-50%) translateY(12px)' }}
+                  >
+                    {/* Connector between timeline and card */}
+                    <div className={`absolute left-1/2 -translate-x-1/2 ${isAbove ? 'bottom-0' : 'top-0'} h-3 w-[2px] bg-red-500`} />
+                    <div className="bg-white shadow-md rounded-lg p-4 min-w-[220px] max-w-[240px]">
+                      <div className="font-semibold text-red-600">{item.label}</div>
+                      <div className="text-gray-700 text-sm leading-snug mt-1">{item.details}</div>
+                      {item.link && (
+                        <div className="mt-2">
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-red-600 underline hover:text-red-800"
+                          >
+                            View Certificate
+                          </a>
+                        </div>
+                      )
+                            }
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })()}
       </div>
     </section>
   );

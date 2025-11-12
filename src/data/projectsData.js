@@ -10,9 +10,9 @@ export const projectsData = [
       • Set up Vite for fast development and hot module replacement
       • Deployed the application on Vercel with CI/CD pipeline`,
     technologies: ["React", "TailwindCSS", "Vite", "Vercel"],
-    github: "https://github.com/darkha03/portfolio",
-    demo: "https://your-portfolio-site.com",
-  image: "/projects/project1.jpg",
+    github: "https://github.com/darkha03/my-portfolio",
+    demo: "https://www.giakhanhnguyen.dev",
+  image: "/projects/project1.png",
   duration: "Oct 2025 - Nov 2025",
   },
   {
@@ -72,13 +72,15 @@ export const projectsData = [
       • Designed intuitive UI/UX to enhance user experience for couples`,
     technologies: ["React Native", "Node.js", "Expo", "PostgreSQL", "Socket.io", "Native Modules"],
     github: "https://github.com/darkha03/distanceApp",
-    demo: "https://distance-love-app.vercel.app/",
     image: "/projects/project4.png",
     duration: "Sep 2025 - Nov 2025",
     gallery: [
       "/projects/project4.png",
       "/projects/project4-screen1.png",
-      "/projects/project4-screen2.png"
+      "/projects/project4-screen2.png",
+      "/projects/project4-screen3.png",
+      "/projects/project4-screen4.png",
+      "/projects/project4-screen5.png"
     ]
   },
   {
