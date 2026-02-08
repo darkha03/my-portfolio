@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Code2, Box, Database, Braces, FileJson, Smartphone, Server, Palette, Gamepad2, GitBranch, Github, Container, Cloud } from "lucide-react";
+import { useI18n } from "../i18n";
 
 export const Skills = () => {
+  const { copy } = useI18n();
   const [activeCategory, setActiveCategory] = useState('programming');
   const [fadeState, setFadeState] = useState('in'); // 'in' | 'out'
 
@@ -40,12 +42,7 @@ export const Skills = () => {
     ]
   };
 
-  const categoryTitles = {
-    programming: 'Programming Languages',
-    frameworks: 'Frameworks & Libraries',
-    tools: 'Tools',
-    databases: 'Databases'
-  };
+  const categoryTitles = copy.skills.categories;
 
   const renderSkillCategory = (title, skills) => (
     <div>
@@ -83,8 +80,8 @@ export const Skills = () => {
     <div className="py-16 px-6 max-w-5xl mx-auto" id="skills" data-aos="fade-up">
       {/* Unified section header outside grid */}
       <div className="text-center md:text-center mb-10">
-        <h2 className="text-3xl font-bold mb-6 text-red-600">Skills</h2>
-        <p className="text-gray-700">Here are the technologies I work with:</p>
+        <h2 className="text-3xl font-bold mb-6 text-red-600">{copy.skills.title}</h2>
+        <p className="text-gray-700">{copy.skills.subtitle}</p>
         {/* Mobile category tabs under header */}
         <div className="md:hidden grid grid-cols-2 gap-2 mt-6">
           {['programming','frameworks','tools','databases'].map(key => (
@@ -92,7 +89,7 @@ export const Skills = () => {
               key={key}
               onClick={() => handleSelect(key)}
               className={`px-3 py-2 rounded-md border text-xs transition ${activeCategory === key ? 'border-red-600 bg-red-600 text-white' : 'border-gray-300 hover:border-red-600 hover:bg-red-50 hover:text-red-600'}`}
-            >{key.charAt(0).toUpperCase()+key.slice(1)}</button>
+            >{categoryTitles[key]}</button>
           ))}
         </div>
       </div>
@@ -108,15 +105,15 @@ export const Skills = () => {
               onClick={() => handleSelect(key)}
               className={`px-4 py-2 rounded-lg border text-sm transition flex items-center gap-2 ${activeCategory === key ? 'border-red-600 bg-red-600 text-white shadow' : 'border-gray-300 hover:border-red-600 hover:bg-red-50 hover:text-red-600'}`}
             >
-              <span>{key.charAt(0).toUpperCase()+key.slice(1)}</span>
+              <span>{categoryTitles[key]}</span>
             </button>
           ))}
         </div>
         <div className={`md:col-start-2 md:row-start-2 transition-opacity duration-200 ${fadeState === 'in' ? 'opacity-100' : 'opacity-0'}`}>
-          {activeCategory === 'programming' && renderSkillCategory('Programming Languages', skillCategories.programming)}
-          {activeCategory === 'frameworks' && renderSkillCategory('Frameworks & Libraries', skillCategories.frameworks)}
-          {activeCategory === 'tools' && renderSkillCategory('Tools', skillCategories.tools)}
-          {activeCategory === 'databases' && renderSkillCategory('Databases', skillCategories.databases)}
+          {activeCategory === 'programming' && renderSkillCategory(categoryTitles.programming, skillCategories.programming)}
+          {activeCategory === 'frameworks' && renderSkillCategory(categoryTitles.frameworks, skillCategories.frameworks)}
+          {activeCategory === 'tools' && renderSkillCategory(categoryTitles.tools, skillCategories.tools)}
+          {activeCategory === 'databases' && renderSkillCategory(categoryTitles.databases, skillCategories.databases)}
         </div>
       </div>
     </div>

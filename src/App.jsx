@@ -9,16 +9,20 @@ import { Contact } from "./components/Contact";
 import { Education } from "./components/Education";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { useI18n } from "./i18n";
 
 export default function App() {
+  const { copy, lang } = useI18n();
+
   useEffect(() => {
-    document.title = "My Portfolio";
+    document.title = copy.meta.title;
+    document.documentElement.lang = lang;
     Aos.init({
       duration: 1000,
       once: true, // Animation only happens once
       
     });
-  }, []);
+  }, [copy.meta.title, lang]);
 
   return (
     <div className="text-black scroll-smooth">

@@ -1,17 +1,19 @@
+import { useI18n } from "../i18n";
+
 export const Contact = () => {
+  const { copy } = useI18n();
   return (
     <div className="py-16 px-6 text-center" id="contacts" data-aos="fade-up">
-      <h2 className="text-3xl font-bold mb-6 text-red-600">Let's Work Together</h2>
+      <h2 className="text-3xl font-bold mb-6 text-red-600">{copy.contact.title}</h2>
       <p className="text-gray-700 mb-6 max-w-xl mx-auto">
-        I'm open to internships and collaboration opportunities.
-        Feel free to reach out!
+        {copy.contact.subtitle}
       </p>
       <div className="flex justify-center gap-6 text-lg font-medium">
         <a
           href="mailto:steve.khanhnguyen@gmail.com"
           className="text-black hover:text-red-600 transition"
         >
-          Email
+          {copy.contact.email}
         </a>
         <a
           href="https://github.com/darkha03"
@@ -19,7 +21,7 @@ export const Contact = () => {
           rel="noopener noreferrer"
           className="text-black hover:text-red-600 transition"
         >
-          GitHub
+          {copy.contact.github}
         </a>
         <a
           href="https://linkedin.com/in/giakhanh-nguyen"
@@ -27,7 +29,7 @@ export const Contact = () => {
           rel="noopener noreferrer"
           className="text-black hover:text-red-600 transition"
         >
-          LinkedIn
+          {copy.contact.linkedin}
         </a>
       </div>
     </div>

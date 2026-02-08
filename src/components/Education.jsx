@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { educationData } from "../data/educationData";
+import { useI18n } from "../i18n";
 
 export const Education = () => {
+  const { copy, lang } = useI18n();
   const [fillPercent, setFillPercent] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [showAllDetails, setShowAllDetails] = useState(false);
   const [shouldAnimate, setShouldAnimate] = useState(false);
   const sectionRef = useRef(null);
   const timelineRef = useRef(null);
+
+  const getLabel = (item) => (typeof item.label === "object" ? item.label[lang] ?? item.label.en : item.label);
+  const getDetails = (item) => (typeof item.details === "object" ? item.details[lang] ?? item.details.en : item.details);
 
   useEffect(() => {
     if (!shouldAnimate) return;
@@ -51,15 +56,15 @@ export const Education = () => {
 
   return (
     <section ref={sectionRef} className="py-16 px-6 max-w-5xl mx-auto text-center" id="education">
-      <h2 className="text-3xl font-bold mb-6 text-red-600">Education</h2>
+      <h2 className="text-3xl font-bold mb-6 text-red-600">{copy.education.title}</h2>
       <p className="text-gray-700 mb-10">
-        Here's a timeline of my educational journey:
+        {copy.education.subtitle}
       </p>
       {/* Mobile: vertical timeline with alternating left/right details */}
       <div className="md:hidden relative w-full max-w-md mx-auto">
         
         <div className="text-center mb-6">
-          <span className="text-sm font-bold text-red-600">Start</span>
+          <span className="text-sm font-bold text-red-600">{copy.education.startLabel}</span>
         </div>
         {/* 3-column grid: left details | timeline | right details */}
 
@@ -96,8 +101,8 @@ export const Education = () => {
                       <div className={`text-xs font-bold mb-1 ${idx <= activeIndex ? 'text-red-600' : 'text-gray-400'}`}>
                         {item.year}
                       </div>
-                      <div className="font-semibold text-red-600 text-sm">{item.label}</div>
-                      <div className="text-gray-700 text-xs leading-snug">{item.details}</div>
+                      <div className="font-semibold text-red-600 text-sm">{getLabel(item)}</div>
+                      <div className="text-gray-700 text-xs leading-snug">{getDetails(item)}</div>
                     </div>
                   </div>
                 )}
@@ -120,7 +125,7 @@ export const Education = () => {
         </div>
         {/* "Continue" label below timeline */}
         <div className="text-center mt-6">
-          <span className="text-sm font-bold text-red-600">Continue</span>
+          <span className="text-sm font-bold text-red-600">{copy.education.continueLabel}</span>
         </div>
       </div>
       {/* Desktop: existing horizontal timeline */}
@@ -180,8 +185,8 @@ export const Education = () => {
                     {/* Connector between timeline and card */}
                     <div className={`absolute left-1/2 -translate-x-1/2 ${isAbove ? 'bottom-0' : 'top-0'} h-3 w-[2px] bg-red-500`} />
                     <div className="bg-white shadow-md rounded-lg p-4 min-w-[220px] max-w-[240px]">
-                      <div className="font-semibold text-red-600">{item.label}</div>
-                      <div className="text-gray-700 text-sm leading-snug mt-1">{item.details}</div>
+                      <div className="font-semibold text-red-600">{getLabel(item)}</div>
+                      <div className="text-gray-700 text-sm leading-snug mt-1">{getDetails(item)}</div>
                       {item.link && (
                         <div className="mt-2">
                           <a
@@ -190,7 +195,7 @@ export const Education = () => {
                             rel="noopener noreferrer"
                             className="text-sm text-red-600 underline hover:text-red-800"
                           >
-                            View Certificate
+                            {copy.education.certificateCta}
                           </a>
                         </div>
                       )

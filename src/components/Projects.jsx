@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { projectsData } from "../data/projectsData";
 import { X, ExternalLink, Github } from "lucide-react";
+import { useI18n } from "../i18n";
 
 export const Projects = () => {
+  const { copy, lang } = useI18n();
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [thumbStart, setThumbStart] = useState(0);
@@ -63,33 +65,39 @@ export const Projects = () => {
 
   return (
     <div className="py-16 px-6 max-w-5xl mx-auto text-center" id="projects" data-aos="fade-up">
-      <h2 className="text-3xl font-bold mb-6 text-red-600">Projects</h2>
-      <p className="text-gray-700 mb-10">Click a project to view more details.</p>
+      <h2 className="text-3xl font-bold mb-6 text-red-600">{copy.projects.title}</h2>
+      <p className="text-gray-700 mb-10">{copy.projects.subtitle}</p>
 
       <div className="grid gap-6 md:grid-cols-2 grid-cols-1 text-left">
-        {projectsData.map((project) => (
-          <div
-            key={project.id}
-            onClick={() => openModal(project)}
-            className="border border-black rounded-xl p-4 cursor-pointer hover:shadow-lg transition transform hover:scale-105"
-          >
-            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-sm text-gray-700">{project.description}</p>
-            {project.technologies && (
-              <div className="flex flex-wrap gap-2 mt-3">
-                {project.technologies.slice(0, 3).map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+        {projectsData.map((project) => {
+          const localized = project.translations?.[lang] ?? {};
+          const title = localized.title ?? project.title;
+          const description = localized.description ?? project.description;
+          return (
+            <div
+              key={project.id}
+              onClick={() => openModal(project)}
+              className="border border-black rounded-xl p-4 cursor-pointer hover:shadow-lg transition transform hover:scale-105"
+            >
+              <h3 className="text-xl font-semibold mb-2">{title}</h3>
+              <p className="text-sm text-gray-700">{description}</p>
+              {project.technologies && (
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {project.technologies.slice(0, 3).map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs bg-red-100 text-red-600 px-2 py-1 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
+      
 
       {/* Modal */}
       {selectedProject && createPortal(
@@ -213,18 +221,28 @@ export const Projects = () => {
 
               {/* Right: Title + Details */}
               <div className="md:col-span-2 flex flex-col">
-                <h3 id="project-modal-title" className="text-2xl font-bold text-red-600 mb-2">
-                  {selectedProject.title}
-                </h3>
-                {selectedProject.duration && (
-                  <div className="text-sm text-gray-500 mb-2">
-                    <span className="font-semibold">Duration:</span> {selectedProject.duration}
-                  </div>
-                )}
-                <p className="text-gray-700 mb-4">{selectedProject.description}</p>
-                <div className="text-gray-800 leading-relaxed whitespace-pre-line flex-1">
-                  {selectedProject.details}
-                </div>
+                {(() => {
+                  const localized = selectedProject.translations?.[lang] ?? {};
+                  const title = localized.title ?? selectedProject.title;
+                  const description = localized.description ?? selectedProject.description;
+                  const details = localized.details ?? selectedProject.details;
+                  return (
+                    <>
+                      <h3 id="project-modal-title" className="text-2xl font-bold text-red-600 mb-2">
+                        {title}
+                      </h3>
+                      {selectedProject.duration && (
+                        <div className="text-sm text-gray-500 mb-2">
+                          <span className="font-semibold">{copy.projects.durationLabel}</span> {selectedProject.duration}
+                        </div>
+                      )}
+                      <p className="text-gray-700 mb-4">{description}</p>
+                      <div className="text-gray-800 leading-relaxed whitespace-pre-line flex-1">
+                        {details}
+                      </div>
+                    </>
+                  );
+                })()}
 
                 {/* Footer: Tech + Buttons */}
                 <div className="mt-6 border-t pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
@@ -246,7 +264,7 @@ export const Projects = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-black transition"
                     >
-                      <Github size={18} /> GitHub
+                      <Github size={18} /> {copy.projects.github}
                     </a>
                     {selectedProject.demo && selectedProject.demo !== "#" && (
                       <a
@@ -255,7 +273,7 @@ export const Projects = () => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-600 text-red-600 hover:bg-red-50 transition"
                       >
-                        <ExternalLink size={18} /> Live Demo
+                        <ExternalLink size={18} /> {copy.projects.liveDemo}
                       </a>
                     )}
                   </div>
