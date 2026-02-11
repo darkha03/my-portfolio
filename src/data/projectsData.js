@@ -156,4 +156,27 @@ export const projectsData = [
       },
     },
   },
+  {
+    id: 6,
+    title: "SCADA Cybersecurity Simulation",
+    description: "A simulation environment to demonstrate cybersecurity attacks and defenses in SCADA systems.",
+    details: `• Developed a SCADA system simulation using Python and Modbus protocol
+      • Designed and deployed a complete cyber range environment using Ansible and Ludus
+      • Created Docker container and custom Ansible roles to automate simulator setup
+      • Led a multidisciplinary project team, defining target architecture, task distribution, and conducting code reviews to ensure project quality`,
+    technologies: ["Python", "Modbus", "Cybersecurity", "Docker", "Ansible", "Ludus", "Infrastructure as Code", "Project Management"],
+    github: "https://github.com/darkha03/Projet-System-Security",
+    image: "/projects/project6.png",
+    duration: "Nov 2025 - Jan 2026",
+    translations: {
+      fr: {
+        title: "Simulation de cybersécurité SCADA",
+        description: "Environnement de simulation pour démontrer les attaques et défenses en cybersécurité dans les systèmes SCADA.",
+        details: `• Simulation de système SCADA avec Python et protocole Modbus
+        • Conception et déploiement d'un environnement complet de cyber-entraînement utilisant Ansible et Ludus
+        • Développement de conteneurs Docker et de rôles Ansible personnalisés pour automatiser la configuration du simulateur
+        • Pilotage d'une équipe projet multidisciplinaire, définition de l'architecture cible, répartition des tâches, et réalisation de revues de code pour assurer la qualité du projet`,
+      },
+    },
+  }
 ];
