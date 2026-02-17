@@ -130,10 +130,11 @@ export const projectsData = [
       • Designed and implemented MySQL database schema for expense tracking
       • Modeled domain entities with SQLAlchemy and managed schema evolution with Flask-Migrate (Alembic).
       • Styled responsive frontend using Bootstrap for mobile-friendly interface
-      • Create CI/CD pipeline for automated testing and deployment`,
-    technologies: ["Python", "Flask", "MySQL", "Bootstrap", "SQLAlchemy"],
+      • Secured the infrastructure using an Nginx reverse proxy with HTTPS ; maintained system stability with 73% unit test coverage.
+      •  Implemented Docker containerization (multi-stage builds) and established automated deployment pipelines via GitHub Actions to a DigitalOcean VPS`,
+    technologies: ["Python", "Flask", "PosgreSQL", "Docker", "GitHub Actions", "Nginx", "SQLAlchemy", "Alembic"],
     github: "https://github.com/darkha03/MyCount",
-    demo: "https://darkha03.pythonanywhere.com/",
+    demo: "https://mycount.online/",
     image: "/projects/project5.png",
     duration: "Aug 2025 - Nov 2025",
     gallery: [
@@ -152,7 +153,8 @@ export const projectsData = [
       • Schéma MySQL pensé pour le suivi des dépenses
       • Modélisation des entités métier avec SQLAlchemy et migrations Alembic
       • Frontend responsive avec Bootstrap
-      • Pipeline CI/CD pour les tests et le déploiement automatisés`,
+      • Sécurisation de l'infrastructure avec Nginx en reverse proxy HTTPS ; maintien de la stabilité du système avec 73% de couverture de tests unitaires.
+      • Containerisation Docker (multi-stage builds) et pipelines de déploiement automatisés via GitHub Actions vers un VPS DigitalOcean`,
       },
     },
   },
