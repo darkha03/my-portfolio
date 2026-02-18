@@ -22,7 +22,7 @@ export const educationData = [
     },
     details: {
       en: "Currently studing engineering at INSA Centre Val de Loire, France. Specialized in software engineering and technology security.",
-      fr: "Étudiant ingénieur à l'INSA Centre Val de Loire, spécialité génie logiciel et sécurité des technologies.",
+      fr: "Étudiant ingénieur à l'INSA Centre Val de Loire, spécialité Sécurité et Technologies Informatiques.",
     }
   },
   {    
