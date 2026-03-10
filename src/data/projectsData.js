@@ -127,12 +127,12 @@ export const projectsData = [
     title: "My Count",
     description: "A website to help users track their expenses and manage plans with groups.",
     details: `• Built full-stack web application using Python Flask framework
-      • Designed and implemented MySQL database schema for expense tracking
       • Modeled domain entities with SQLAlchemy and managed schema evolution with Flask-Migrate (Alembic).
       • Styled responsive frontend using Bootstrap for mobile-friendly interface
-      • Secured the infrastructure using an Nginx reverse proxy with HTTPS ; maintained system stability with 73% unit test coverage.
-      •  Implemented Docker containerization (multi-stage builds) and established automated deployment pipelines via GitHub Actions to a DigitalOcean VPS`,
-    technologies: ["Python", "Flask", "PosgreSQL", "Docker", "GitHub Actions", "Nginx", "SQLAlchemy", "Alembic"],
+      • Secured the infrastructure using an Nginx reverse proxy with HTTPS, maintained system stability with 73% unit test coverage.
+      • Implemented Docker containerization (multi-stage builds) and established automated deployment pipelines via GitHub Actions to a DigitalOcean VPS
+      • Monitored application performance and reliability post-deployment with Grafana, ensuring a seamless user experience with minimal downtime`,
+    technologies: ["Python", "Flask", "PosgreSQL", "Docker", "GitHub Actions", "Nginx", "SQLAlchemy", "Grafana"],
     github: "https://github.com/darkha03/MyCount",
     demo: "https://mycount.online/",
     image: "/projects/project5.png",
@@ -150,11 +150,11 @@ export const projectsData = [
         title: "My Count",
         description: "Site web pour suivre ses dépenses et gérer des plans en groupe.",
         details: `• Application web full-stack avec Flask
-      • Schéma MySQL pensé pour le suivi des dépenses
       • Modélisation des entités métier avec SQLAlchemy et migrations Alembic
       • Frontend responsive avec Bootstrap
       • Sécurisation de l'infrastructure avec Nginx en reverse proxy HTTPS ; maintien de la stabilité du système avec 73% de couverture de tests unitaires.
-      • Containerisation Docker (multi-stage builds) et pipelines de déploiement automatisés via GitHub Actions vers un VPS DigitalOcean`,
+      • Containerisation Docker (multi-stage builds) et pipelines de déploiement automatisés via GitHub Actions vers un VPS DigitalOcean
+      • Surveillance des performances et de la fiabilité post-déploiement avec Grafana, assurant une expérience utilisateur fluide avec un temps d'arrêt minimal`,
       },
     },
   },
