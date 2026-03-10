@@ -130,8 +130,8 @@ export const projectsData = [
       • Modeled domain entities with SQLAlchemy and managed schema evolution with Flask-Migrate (Alembic).
       • Styled responsive frontend using Bootstrap for mobile-friendly interface
       • Secured the infrastructure using an Nginx reverse proxy with HTTPS, maintained system stability with 73% unit test coverage.
-      • Implemented Docker containerization (multi-stage builds) and established automated deployment pipelines via GitHub Actions to a DigitalOcean VPS
-      • Monitored application performance and reliability post-deployment with Grafana, ensuring a seamless user experience with minimal downtime`,
+      • Implemented Docker containerization (multi-stage builds) and established automated deployment pipelines via GitHub Actions to a VPS
+      • Monitored application performance and reliability post-deployment with Grafana`,
     technologies: ["Python", "Flask", "PosgreSQL", "Docker", "GitHub Actions", "Nginx", "SQLAlchemy", "Grafana"],
     github: "https://github.com/darkha03/MyCount",
     demo: "https://mycount.online/",
@@ -154,7 +154,7 @@ export const projectsData = [
       • Frontend responsive avec Bootstrap
       • Sécurisation de l'infrastructure avec Nginx en reverse proxy HTTPS ; maintien de la stabilité du système avec 73% de couverture de tests unitaires.
       • Containerisation Docker (multi-stage builds) et pipelines de déploiement automatisés via GitHub Actions vers un VPS DigitalOcean
-      • Surveillance des performances et de la fiabilité post-déploiement avec Grafana, assurant une expérience utilisateur fluide avec un temps d'arrêt minimal`,
+      • Surveillance des performances et de la fiabilité post-déploiement avec Grafana`,
       },
     },
   },
@@ -178,6 +178,58 @@ export const projectsData = [
         • Conception et déploiement d'un environnement complet de cyber-entraînement utilisant Ansible et Ludus
         • Développement de conteneurs Docker et de rôles Ansible personnalisés pour automatiser la configuration du simulateur
         • Pilotage d'une équipe projet multidisciplinaire, définition de l'architecture cible, répartition des tâches, et réalisation de revues de code pour assurer la qualité du projet`,
+      },
+    },
+  },
+  {
+    id: 7,
+    title: "Kaggle Challenges",
+    description: "Participated in various Kaggle competitions to apply machine learning techniques on real-world datasets.",
+    details: `• Competed in multiple Kaggle competitions, applying machine learning algorithms to solve real-world problems
+      • Utilized Python libraries such as Pandas, Scikit-learn, and XGBoost for data preprocessing, feature engineering, and model training
+      • Analyzed datasets, handled missing values, and performed exploratory data analysis to gain insights
+      • Achieved a overall 90% accuracy, demonstrating strong problem-solving and data science skills`,
+    technologies: ["Python", "Pandas", "Scikit-learn", "XGBoost", "Machine Learning", "Data Analysis", "NumPy", "TensorFlow", "PyTorch", "Keras"],
+    github: "https://github.com/darkha03/Kaggle_Challenges",
+    image: "/projects/project7.png",
+    duration: "2026 - Present",
+    gallery: [
+      "/projects/project7.png"
+    ],
+    translations: {
+      fr: {
+        title: "Défis Kaggle",
+        description: "Participation à divers concours Kaggle pour appliquer des techniques de machine learning sur des datasets réels.",
+        details: `• Participation à plusieurs compétitions Kaggle, appliquant des algorithmes de machine learning pour résoudre des problèmes réels
+        • Utilisation de bibliothèques Python telles que Pandas, Scikit-learn, et XGBoost pour le prétraitement des données, l'ingénierie des fonctionnalités, et l'entraînement de modèles
+        • Analyse des datasets, gestion des valeurs manquantes, et réalisation d'analyses exploratoires pour obtenir des insights
+        •  Atteinte d'une précision globale de 90%, démontrant de solides compétences en résolution de problèmes et en data science`,
+      },
+    },
+  },
+  {
+    id: 8,
+    title: "Naruto Jutsu Detection",
+    description: "A computer vision project to detect and classify Naruto jutsu hand signs using deep learning.",
+    details: `• Developed a computer vision model to detect and classify Naruto jutsu hand signs using convolutional neural networks (CNNs)
+      • Collected and annotated a dataset of hand sign images for training and evaluation
+      • Implemented a prediction stabilization, and a stateful, error-tolerant sequence matcher to recognize from noisy frame predictions.
+      • Optimized the detection pipeline to reduce latency up to 50% for low-latency (<30ms) performance`,
+    technologies: ["Python", "TensorFlow", "Computer Vision", "Deep Learning", "YOLO", "OpenCV"],
+    github: "https://github.com/darkha03/Naruto_Jutsu_Detection",
+    image: "/projects/project8.png",
+    duration: "2026 - Present",
+    gallery: [
+      "/projects/project8.png"
+    ],
+    translations: {
+      fr: {
+        title: "Détection de Jutsu Naruto",
+        description: "Un projet de vision par ordinateur pour détecter et classifier les signes de main des jutsu de Naruto en utilisant le deep learning.",  
+        details: `• Développement d'un modèle de vision par ordinateur pour détecter et classifier les signes de main des jutsu de Naruto en utilisant des réseaux de neurones convolutionnels (CNNs)
+        • Collecte et annotation d'un dataset d'images de signes de main pour l'entraînement et l'évaluation
+        • Implémentation d'une stabilisation des prédictions et d'un séquenceur à état, tolérant les erreurs pour reconnaître à partir de prédictions de frames bruitées.
+        • Optimisation du pipeline de détection pour réduire la latence jusqu'à 50% afin d'obtenir des performances à faible latence (<30ms)`,
       },
     },
   }

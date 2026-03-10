@@ -32,13 +32,26 @@ export const Skills = () => {
       { name: "Git", icon: GitBranch },
       { name: "GitHub", icon: Github },
       { name: "Proxmox", icon: Server },
-      { name: "Docker", icon: Container }
+      { name: "Docker", icon: Container },
+      { name: "Linux", icon: Server },
+      { name: "Grafana", icon: Server },
+      { name: "Nginx", icon: Server },
+      { name: "Prometheus", icon: Server }
     ],
     databases: [
       { name: "MongoDB", icon: Database },
       { name: "PostgreSQL", icon: Database },
       { name: "MySQL", icon: Database },
       { name: "Cloudinary", icon: Cloud }
+    ],
+    machine_learning: [
+      { name: "TensorFlow", icon: Code2 },
+      { name: "PyTorch", icon: Code2 },
+      { name: "Keras", icon: Code2 },
+      { name: "Scikit-learn", icon: Code2 },
+      { name: "XGBoost", icon: Code2 },
+      { name: "Pandas", icon: Code2 ,},
+      { name: "NumPy", icon: Code2 },
     ]
   };
 
@@ -84,7 +97,7 @@ export const Skills = () => {
         <p className="text-gray-700">{copy.skills.subtitle}</p>
         {/* Mobile category tabs under header */}
         <div className="md:hidden grid grid-cols-2 gap-2 mt-6">
-          {['programming','frameworks','tools','databases'].map(key => (
+          {['programming','frameworks','tools','databases','machine_learning'].map(key => (
             <button
               key={key}
               onClick={() => handleSelect(key)}
@@ -99,7 +112,7 @@ export const Skills = () => {
           <h3 className="text-xl font-semibold text-red-600">{categoryTitles[activeCategory]}</h3>
         </div>
         <div className="hidden md:flex md:col-start-1 md:row-start-2 flex-col gap-2 sticky top-24 h-fit text-left pt-2">
-          {['programming','frameworks','tools','databases'].map(key => (
+          {['programming','frameworks','tools','databases','machine_learning'].map(key => (
             <button
               key={key}
               onClick={() => handleSelect(key)}
@@ -114,6 +127,7 @@ export const Skills = () => {
           {activeCategory === 'frameworks' && renderSkillCategory(categoryTitles.frameworks, skillCategories.frameworks)}
           {activeCategory === 'tools' && renderSkillCategory(categoryTitles.tools, skillCategories.tools)}
           {activeCategory === 'databases' && renderSkillCategory(categoryTitles.databases, skillCategories.databases)}
+          {activeCategory === 'machine_learning' && renderSkillCategory(categoryTitles.machine_learning, skillCategories.machine_learning)}
         </div>
       </div>
     </div>

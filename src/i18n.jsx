@@ -9,7 +9,7 @@ const translations = {
       greeting: "Hello, I'm",
       nameHighlight: "Gia Khanh NGUYEN",
       description:
-        "Informatic engineer student passionate about turning creative ideas into applications. Seeking internships to apply my skills and contribute to innovative projects.",
+        "Informatic engineer student passionate about turning creative ideas into applications, with experience developing end-to-end applications. Seeking internships to apply my skills and contribute to innovative projects.",
       aboutCta: "More About Me",
       cvCta: "Download My CV",
     },
@@ -21,6 +21,7 @@ const translations = {
         frameworks: "Frameworks & Libraries",
         tools: "Tools",
         databases: "Databases",
+        machine_learning: "Machine Learning",
       },
     },
     whyHire: {
@@ -35,7 +36,7 @@ const translations = {
     },
     offer: {
       title: "What I Offer",
-      subtitle: "Here's how I can help bring your ideas to life:",
+      subtitle: "As a Jack-of-all-Trade, here's how I can help bring your ideas to life:",
       services: [
         {
           title: "Frontend Development",
@@ -49,6 +50,14 @@ const translations = {
           title: "UI/UX Design",
           description: "Designing user-friendly interfaces that are clean, modern, and accessible.",
         },
+        {
+          title: "Machine Learning",
+          description: "Applying machine learning techniques to solve problems and extract insights from data.",
+        },
+        {
+          title: "DevOps & Deployment",
+          description: "Containerization with Docker, CI/CD pipelines, and cloud deployment for reliable applications.",
+        }
       ],
     },
     education: {
@@ -80,7 +89,7 @@ const translations = {
       greeting: "Bonjour, je suis",
       nameHighlight: "Gia Khanh NGUYEN",
       description:
-        "Étudiant ingénieur en informatique, passionné par la création d'applications. Je cherche un stage pour appliquer mes compétences et contribuer à des projets innovants.",
+        "Étudiant ingénieur en informatique, passionné par la création d'applications, avec une expérience dans le développement d'applications de bout en bout. Je cherche un stage pour appliquer mes compétences et contribuer à des projets innovants.",
       aboutCta: "En savoir plus",
       cvCta: "Télécharger mon CV",
     },
@@ -92,6 +101,7 @@ const translations = {
         frameworks: "Frameworks et bibliothèques",
         tools: "Outils",
         databases: "Bases de données",
+        machine_learning: "Machine Learning",
       },
     },
     whyHire: {
@@ -106,7 +116,7 @@ const translations = {
     },
     offer: {
       title: "Ce que je propose",
-      subtitle: "Voici comment je peux concrétiser vos idées :",
+      subtitle: "En tant que touche-à-tout, voici comment je peux aider à concrétiser vos idées :",
       services: [
         {
           title: "Développement Frontend",
@@ -120,6 +130,14 @@ const translations = {
           title: "Design UI/UX",
           description: "Interfaces modernes, épurées et accessibles pour une bonne expérience utilisateur.",
         },
+        {
+          title: "Machine Learning",
+          description: "Application de techniques de machine learning pour résoudre des problèmes et extraire des insights à partir de données.",
+        },
+        {
+          title: "DevOps & Déploiement",
+          description: "Containerisation avec Docker, pipelines CI/CD, et déploiement cloud pour des applications fiables.",
+        }
       ],
     },
     education: {
