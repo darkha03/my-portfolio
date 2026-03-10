@@ -190,7 +190,7 @@ export const projectsData = [
       • Analyzed datasets, handled missing values, and performed exploratory data analysis to gain insights
       • Achieved a overall 90% accuracy, demonstrating strong problem-solving and data science skills`,
     technologies: ["Python", "Pandas", "Scikit-learn", "XGBoost", "Machine Learning", "Data Analysis", "NumPy", "TensorFlow", "PyTorch", "Keras"],
-    github: "https://github.com/darkha03/Kaggle_Challenges",
+    github: "https://github.com/darkha03/Kaggle_Challenge",
     image: "/projects/project7.png",
     duration: "2026 - Present",
     gallery: [
@@ -217,10 +217,10 @@ export const projectsData = [
       • Optimized the detection pipeline to reduce latency up to 50% for low-latency (<30ms) performance`,
     technologies: ["Python", "TensorFlow", "Computer Vision", "Deep Learning", "YOLO", "OpenCV"],
     github: "https://github.com/darkha03/Naruto_Jutsu_Detection",
-    image: "/projects/project8.png",
+    image: "/projects/project8.mp4",
     duration: "2026 - Present",
     gallery: [
-      "/projects/project8.png"
+      "/projects/project8.mp4"
     ],
     translations: {
       fr: {

@@ -4,6 +4,8 @@ import { projectsData } from "../data/projectsData";
 import { X, ExternalLink, Github } from "lucide-react";
 import { useI18n } from "../i18n";
 
+const isVideo = (src) => /\.(mp4|webm|ogg)$/i.test(src);
+
 export const Projects = () => {
   const { copy, lang } = useI18n();
   const [selectedProject, setSelectedProject] = useState(null);
@@ -129,17 +131,41 @@ export const Projects = () => {
                 {/* Main Image */}
                 <div className="w-full h-48 md:h-64 bg-gray-50 rounded-xl flex items-center justify-center overflow-hidden">
                   {selectedProject.gallery ? (
-                    <img
-                      src={selectedProject.gallery[currentImageIndex]}
-                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                      className="w-full h-full object-contain transition-opacity duration-500"
-                    />
+                    isVideo(selectedProject.gallery[currentImageIndex]) ? (
+                      <video
+                        key={selectedProject.gallery[currentImageIndex]}
+                        src={selectedProject.gallery[currentImageIndex]}
+                        className="w-full h-full object-contain"
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                      />
+                    ) : (
+                      <img
+                        src={selectedProject.gallery[currentImageIndex]}
+                        alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                        className="w-full h-full object-contain transition-opacity duration-500"
+                      />
+                    )
                   ) : selectedProject.image ? (
-                    <img
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      className="w-full h-full object-contain"
-                    />
+                    isVideo(selectedProject.image) ? (
+                      <video
+                        key={selectedProject.image}
+                        src={selectedProject.image}
+                        className="w-full h-full object-contain"
+                        controls
+                        autoPlay
+                        loop
+                        muted
+                      />
+                    ) : (
+                      <img
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        className="w-full h-full object-contain"
+                      />
+                    )
                   ) : (
                     <div className="w-full h-full rounded-xl bg-gradient-to-br from-gray-100 to-gray-200" />
                   )}
@@ -205,11 +231,17 @@ export const Projects = () => {
                               }`}
                               aria-label={`Go to image ${realIdx + 1}`}
                             >
-                              <img
-                                src={img}
-                                alt={`Thumbnail ${realIdx + 1}`}
-                                className="absolute inset-0 w-full h-full object-contain p-0.5"
-                              />
+                              {isVideo(img) ? (
+                                <div className="absolute inset-0 flex items-center justify-center bg-gray-800">
+                                  <span className="text-white text-lg">&#9654;</span>
+                                </div>
+                              ) : (
+                                <img
+                                  src={img}
+                                  alt={`Thumbnail ${realIdx + 1}`}
+                                  className="absolute inset-0 w-full h-full object-contain p-0.5"
+                                />
+                              )}
                             </button>
                           );
                         })}
